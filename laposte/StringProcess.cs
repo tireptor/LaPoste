@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace laposte
 {
-    class Program
+    abstract class StringProcess
     {
-        static void escape(ref string sh)
+
+        public static void escape(ref string sh)
         {
             sh = sh.Replace("é", "e");
             sh = sh.Replace("è", "e");
@@ -31,7 +32,8 @@ namespace laposte
             sh = sh.Replace("-", "");
             sh = sh.Replace("_", "");
         }
-        static char[] sort_(ref string arrayToSort)
+
+        public static char[] sortLetterInOrder(ref string arrayToSort)
         {
             char[] tonTableaudeChar = arrayToSort.ToCharArray();
             int i, taille;
@@ -44,7 +46,7 @@ namespace laposte
                 for (i = 0; i < taille - 1; i++)
                 {
                     firstValue = Convert.ToInt32(tonTableaudeChar[i]);
-                    secondValue = Convert.ToInt32(tonTableaudeChar[i+1]);
+                    secondValue = Convert.ToInt32(tonTableaudeChar[i + 1]);
                     if (firstValue > secondValue)
                     {
                         tmp = tonTableaudeChar[i];
@@ -55,24 +57,6 @@ namespace laposte
                 taille = taille - 1;
             }
             return tonTableaudeChar;
-        }
-        static void Main(string[] args)
-        {
-            string sh = "";
-            Console.WriteLine("Saisir une phrase \n");
-            sh = Console.ReadLine();
-            StringProcess.escape(ref sh);
-            //escape(ref sh);
-            //char[] arrayOfChar = sort_(ref sh);
-            char[] arrayOfChar = StringProcess.sortLetterInOrder(ref sh);
-            string newSh = "";
-            foreach (char character in arrayOfChar)
-            {
-                newSh += character.ToString();
-            }
-            Console.WriteLine(newSh);
-            Console.ReadKey();
-
         }
     }
 }
